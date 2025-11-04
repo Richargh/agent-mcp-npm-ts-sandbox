@@ -1,0 +1,29 @@
+### list available tools
+POST http://localhost:3000/mcp
+Accept: application/json; text/event-stream
+Content-Type: application/json
+
+{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/list",
+    "params": {}
+}
+
+### Call the multiply tool:
+POST http://localhost:3000/mcp
+Accept: application/json; text/event-stream
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "tools/call",
+  "params": {
+    "name": "multiply",
+    "arguments": {
+      "x": 5,
+      "y": 10
+    }
+  }
+}
