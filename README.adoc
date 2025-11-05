@@ -71,3 +71,12 @@ In Claude Code:
 * resources and tools might be called when you write the appropriate trigger phrases
 
 When you start the server you will see some examples in the console.
+
+=== MCP in OpenAi Context
+
+In Context:
+
+* tools might be called when you write the appropriate trigger phrases
+* the other primitives are not (yet) supported
+
+When you start the server you will see some examples in the console.
