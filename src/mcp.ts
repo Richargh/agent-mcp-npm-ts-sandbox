@@ -40,5 +40,25 @@ export function configureMcpHandler(): McpServer {
             ]
         }));
 
+    handler.registerPrompt(
+        'write-a-poem',
+        {
+            title: 'Write a poem',
+            description: 'Writes a simple poem for given name',
+            argsSchema: { name: z.string() }
+        },
+        ({ name }) => ({
+            messages: [
+                {
+                    role: 'user',
+                    content: {
+                        type: 'text',
+                        text: `Roses are read, violets are blue and so are you ${name}`
+                    }
+                }
+            ]
+        })
+    );
+
     return handler;
 }

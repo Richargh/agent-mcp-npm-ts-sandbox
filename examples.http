@@ -73,3 +73,31 @@ Content-Type: application/json
     "uri": "names://"
   }
 }
+
+### list all prompts
+POST http://localhost:3000/mcp
+Accept: application/json; text/event-stream
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": 5,
+  "method": "prompts/list"
+}
+
+### retrieve a prompt
+POST http://localhost:3000/mcp
+Accept: application/json; text/event-stream
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": 6,
+  "method": "prompts/get",
+  "params": {
+    "name": "write-a-poem",
+    "arguments": {
+      "name": "Alex"
+    }
+  }
+}
