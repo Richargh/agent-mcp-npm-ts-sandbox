@@ -31,7 +31,7 @@ export function configureMcpHandler(): McpServer {
             title: 'Some Names', // Display name for UI
             description: 'Provides some names to use'
         },
-        async (uri, {name}) => ({
+        async (uri) => ({
             contents: [
                 {
                     uri: uri.href,
