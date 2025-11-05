@@ -7,6 +7,8 @@
 ** No authentication
 * TypeScript
 
+Alternative is link:https://github.com/Richargh/agent-hyper-api-fastify-npm-ts-sandbox[]
+
 == Preconditions
 
 * Install the node version from link:.nvmrc[] via link:https://github.com/Schniz/fnm[fnm] (or link:https://github.com/nvm-sh/nvm[nvm]]) by calling `fnm use`
