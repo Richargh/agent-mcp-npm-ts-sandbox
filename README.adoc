@@ -14,5 +14,6 @@
 
 * `npm run lint`: Lint code and types
 * `npm run start`: Start local dev server at `localhost:3000`
+** Then follow log statements to integrated it with claude
 
 After starting the dev server, try one of the requests from link:examples.http[]
