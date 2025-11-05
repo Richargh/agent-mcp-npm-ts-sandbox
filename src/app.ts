@@ -20,5 +20,9 @@ export function configureHttpApp(mcpHandler: McpServer): Express {
         await transport.handleRequest(req, res, req.body);
     });
 
+    app.get('/mcp', async (_, res) => {
+        res.status(405).send('Server does not support session management');
+    });
+
     return app;
 }

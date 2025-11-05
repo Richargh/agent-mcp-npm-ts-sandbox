@@ -3,6 +3,7 @@
 == Features
 
 * MCP link:https://github.com/modelcontextprotocol/typescript-sdk[Typescript SDK]
+** No link:https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#session-management[Session Management]
 * TypeScript
 
 == Preconditions
