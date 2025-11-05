@@ -2,12 +2,12 @@ import {McpServer, ResourceTemplate} from '@modelcontextprotocol/sdk/server/mcp.
 import {z} from 'zod';
 
 export function configureMcpHandler(): McpServer {
-    const server = new McpServer({
+    const handler = new McpServer({
         name: 'demo-server',
         version: '1.0.0'
     });
 
-    server.registerTool(
+    handler.registerTool(
         'multiply',
         {
             title: 'Multiplication',
@@ -24,5 +24,5 @@ export function configureMcpHandler(): McpServer {
         }
     );
 
-    return server;
+    return handler;
 }
