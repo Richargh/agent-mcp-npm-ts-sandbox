@@ -1,3 +1,35 @@
+### Initialize first
+POST http://localhost:3000/mcp
+Accept: application/json; text/event-stream
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {
+      "roots": {
+        "listChanged": true
+      },
+      "sampling": {},
+      "elicitation": {}
+    },
+    "clientInfo": {
+      "name": "ExampleClient",
+      "title": "Example Client Display Name",
+      "version": "1.0.0"
+    }
+  }
+}
+
+### Try and fail to establish SSE stream
+GET http://localhost:3000/mcp
+Accept: application/json; text/event-stream
+Content-Type: application/json
+
+
 ### list available tools
 POST http://localhost:3000/mcp
 Accept: application/json; text/event-stream
