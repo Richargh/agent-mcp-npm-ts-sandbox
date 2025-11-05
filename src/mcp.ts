@@ -24,5 +24,21 @@ export function configureMcpHandler(): McpServer {
         }
     );
 
+    handler.registerResource(
+        'names',
+        new ResourceTemplate('names://', {list: undefined}),
+        {
+            title: 'Some Names', // Display name for UI
+            description: 'Provides some names to use'
+        },
+        async (uri, {name}) => ({
+            contents: [
+                {
+                    uri: uri.href,
+                    content: ['Alex', 'Taylor', 'Michael']
+                }
+            ]
+        }));
+
     return handler;
 }
