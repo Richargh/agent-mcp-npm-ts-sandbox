@@ -2,8 +2,9 @@
 
 == Features
 
-* MCP link:https://github.com/modelcontextprotocol/typescript-sdk[Typescript SDK]
+* MCP (Model Context Protocol) link:https://github.com/modelcontextprotocol/typescript-sdk[Typescript SDK]
 ** No link:https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#session-management[Session Management]
+** No authentication
 * TypeScript
 
 == Preconditions
@@ -17,3 +18,56 @@
 ** Then follow log statements to integrated it with claude
 
 After starting the dev server, try one of the requests from link:examples.http[]
+
+== On MCP
+
+An MCP server can currently use (protocol revision: 2025-06-18) two transport modes:
+
+* link:https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio[Standard I/O]:
+** The client runs the server as a subprocess.
+** They communicate via stdin and stdout.
+** Authentication supplied via environment variables.
+* link:https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http[Streamable HTTP]
+** The server operates as an independent process that can handle multiple client connections.
+** Uses HTTP POST requests (yes it is primarily a POST request [sigh, good bye caching], because this protocol is based on JSON-RPC).
+** POST requests are either:
+*** responded to directly (the new default, previous protocol versions always used SSE for the response).
+*** or the reply is sent via SSE (server-sent events).
+** An SSE connection allows the server to proactively notify the client of changes.
+* HTTP with SSE (deprecated since 2025-03-26)
+
+MCP has link:https://modelcontextprotocol.io/specification/2025-06-18/server[three primitives] that are provided to the client:
+
+* Prompts: Pre-defined templates or instructions that guide language model interactions
+* Resources: Structured data or content that provides additional context to the model
+* Tools: Executable functions that allow models to perform actions or retrieve information
+
+Not all features of MCP are supported by all clients.
+This is because the protocol is relatively young, has seen some changes and there are lots of things that MAY be implemented but not MUST.
+link:https://www.anthropic.com/news/model-context-protocol[MCP was created November 2024], since then we have had three versions:
+
+* 2024-11-05
+* 2025-03-26
+* 2025-06-18 (latest)
+
+Which features are supported by which clients is found here: link:https://modelcontextprotocol.io/clients[]
+
+Tools are the most widely supported ones.
+Resources and prompts are not often supported.
+
+According to the above feature matrix, the following features are almost never supported:
+
+* Discovery: it's a bit unclear what that is exactly. Probably that clients can query what tools/prompts/resources the server has.
+* Elicitation: the server can ask the user for additional information before completing the original request.
+* Instructions: an additional field that the server sends to the client during initialization. Can be thought of like a "hint" to the model to improve the LLM’s understanding of available tools, resources, etc.
+* Roots: define the boundaries of where servers can operate within the filesystem, allowing them to understand which directories and files they have access to.
+* Sampling: Servers can send prompts to the LLM. The user can review them. Basically allows the server to query the LLM.
+
+=== MCP in Claude Code
+
+In Claude Code:
+
+* prompts can be used for slash commands
+* resources and tools might be called when you write the appropriate trigger phrases
+
+When you start the server you will see some examples in the console.
