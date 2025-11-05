@@ -1,5 +1,6 @@
 import {McpServer, ResourceTemplate} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {z} from 'zod';
+import type {Request} from "express";
 
 export function configureMcpHandler(): McpServer {
     const handler = new McpServer({
@@ -62,4 +63,18 @@ export function configureMcpHandler(): McpServer {
     );
 
     return handler;
+}
+
+export function prettyFormatCall(req: Request): string {
+    const method = req.body?.method ?? "Unknown"
+    let result = `Request: ${method}`
+
+    if(method == "tools/call")
+        result += `->${req.body?.params?.name ?? "Unknown"}`
+    if(method == "resources/read")
+        result += `->${req.body?.params?.uri ?? "Unknown"}`
+    if(method == "prompts/get")
+        result += `->${req.body?.params?.name ?? "Unknown"}`
+
+    return result;
 }
