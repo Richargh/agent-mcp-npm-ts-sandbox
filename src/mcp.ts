@@ -41,19 +41,20 @@ export function configureMcpHandler(): McpServer {
         }));
 
     handler.registerPrompt(
-        'write-a-poem',
+        'Grade generated poem',
         {
-            title: 'Write a poem',
-            description: 'Writes a simple poem for given name',
-            argsSchema: { name: z.string() }
+            title: 'grade-generated-poem',
+            description: 'Asks the LLM to grade a generated poem',
+            argsSchema: {name: z.string()}
         },
-        ({ name }) => ({
+        ({name}) => ({
             messages: [
                 {
                     role: 'user',
                     content: {
                         type: 'text',
-                        text: `Roses are read, violets are blue and so are you ${name}`
+                        text: `Grade the following poem and explain the grade: 
+                        Roses are read, violets are blew, they may have their mistakes, but ${name}, not you.`
                     }
                 }
             ]
