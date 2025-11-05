@@ -16,8 +16,8 @@ function main() {
         console.log(`* Try also some of the actions:`);
         console.log(`** Use the prompt by calling slash command /grade-generated-poem`);
         console.log(`** Ask it to 'Multiply 5 and 7'`);
+        console.log(`** Ask it to 'Check your resources for important book names'`);
         console.log(`---------Interactions---------`);
-
     }).on('error', error => {
         console.error('Server error:', error);
         process.exit(1);

@@ -26,17 +26,29 @@ export function configureMcpHandler(): McpServer {
     );
 
     handler.registerResource(
-        'names',
-        new ResourceTemplate('names://', {list: undefined}),
+        'software-books',
+        new ResourceTemplate('software-books://{service}', {
+            list: async () => ({
+                resources: [{
+                    uri: 'software-books://names',
+                    name: 'software-book-names',
+                    title: 'Names of important software books',
+                    description: 'Provides software book names to use'
+                }]
+            })
+        }),
         {
-            title: 'Some Names', // Display name for UI
-            description: 'Provides some names to use'
+            title: 'Software Books', // Display name for UI
+            description: 'Provides software book resources'
         },
-        async (uri) => ({
+        async (uri, { service }) => ({
             contents: [
                 {
                     uri: uri.href,
-                    content: ['Alex', 'Taylor', 'Michael']
+                    mimeType: 'text/plain',
+                    text: `Implementation Patterns
+                    Tidy First
+                    Refactoring`
                 }
             ]
         }));
